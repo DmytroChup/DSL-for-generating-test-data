@@ -4,7 +4,7 @@ This code defines a `TestData` module that includes classes for generating test 
 
 ## TestData::Entity
 
-- `initialize(&block)`: The `Entity` class is instantiated with a block defining various attributes such as `name`, `age`, `birth date`, `gender`, `dad's name`, `email`, and `animal` based on specified types and options.
+- `initialize(&block)`: The `Entity` class is created using a block that defines various attributes that the user can come up with himself, based on the specified types and parameters.
 - `attribute(name, type, options = {})`: Private method within `Entity` used to define attributes with specified types and options.
 
 ## TestData::Generator
