@@ -52,8 +52,34 @@ module TestData
     end
 
     def self.string(length)
-      chars = ('a'..'z').to_a + ('A'..'Z').to_a
-      length.times.map { chars.sample }.join
+      string = ""
+      charsBG = %w[A E I O U Y]
+      charsMG = %w[a e i o u y]
+      charsBS = ('A'..'Z').to_a - charsBG
+      charsMS = ('a'..'z').to_a - charsMG
+
+      if rand(2) == 0
+        string += charsBG.sample
+      else
+        string += charsBS.sample
+      end
+
+      (length - 1).times do
+        last_char = string[-1]
+
+        if charsBG.include?(last_char)
+          string += charsMS.sample
+        elsif charsBS.include?(last_char)
+          string += charsMG.sample
+        elsif charsMS.include?(last_char)
+          string += charsMS.sample
+        elsif charsMG.include?(last_char)
+          string += charsMG.sample
+        else
+          string += (rand(2) == 0 ? charsMG : charsMS).sample
+        end
+      end
+      string
     end
 
     def self.date(range)
@@ -65,7 +91,9 @@ module TestData
     end
 
     def self.email(length)
-      string(length) + "@example.com"
+      chars = ('a'..'z').to_a
+      local_part = length.times.map { chars.sample }.join
+      local_part + "@example.com"
     end
 
     def self.yml(path)
